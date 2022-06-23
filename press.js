@@ -8,7 +8,12 @@ const Switchbot = require('node-switchbot');
   let success = false;
   while (numberOfTries < 3 && !success) {
     //Find a Bot (WoHand)
-    const bot_list = await switchbot.discover({ model: 'H'});
+    let bot_list = []
+    try {
+      bot_list = await switchbot.discover({ model: 'H'});
+    } catch (error) {
+      console.log('Encountered an error while searching for the bot.')
+    }
     
     if (bot_list.length < 1) {
       console.log('No devices were found. Searching again ' + (3 - numberOfTries) + ' more time(s).')
