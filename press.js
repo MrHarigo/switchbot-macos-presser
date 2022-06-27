@@ -22,9 +22,14 @@ const Switchbot = require('node-switchbot');
       // The `SwitchbotDeviceWoHand` object representing the found Bot.
       let device = bot_list[0];
       // Press the Bot's arm
-      await device.press();
-      success = true;
-      console.log('Successfully pressed :)');
+      try {
+        await device.press();
+        success = true;
+        console.log('Successfully pressed :)');
+      } catch (error) {
+        console.log('Encounted an error while trying to press the button.')
+        success = false;
+      }
     }
   }
   if (!success) {
